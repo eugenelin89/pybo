@@ -6,7 +6,23 @@ from oauth2client.client import GoogleCredentials
 def process_message(message):
     pass
 
-
+def prob_interrogative(sentence):
+    """ Determine likelihood of sentence being interrogative.
+    Returns value between 0 and 1.
+    """
+    prob = 0
+    # Plan to apply ML Classification. For now just simple implementation.
+    # If sentence includes 5w1h +0.4
+    # If 5w+1h is beginning of sentence +0.2
+    # If sentence ends with "?", +0.4
+    wh = ['what','where','which','who','when','how']
+    if any(str in sentence.lower().strip() for str in wh):
+        prob += 0.4
+    if any(sentence.lower().strip().startswith(str) for str in wh):
+        prob += 0.2
+    if "?" in sentence:
+        prob += 0.4
+    return prob
 
 ########################
 # Natural Language API #
